@@ -9,6 +9,8 @@ const beatles = [
 , { name: "Paul", value: 23 }
 ]
 
+console.log("beatles before forEach:", beatles)
+
 // forEach does not return anything.
 // Using `return` does not stop the "loop". It simply prevents the
 // callback function executing any further for that item
@@ -16,6 +18,7 @@ const beatles = [
 // It can be used to act on the individual items...
 // ... or to alter the items
 
+console.log("\nAbout to call result = beatles.forEach():")
 const result = beatles.forEach(item => {
   console.log("name:", item.name)
   item.group = "Beatles"
@@ -26,9 +29,12 @@ const result = beatles.forEach(item => {
   }
 
   item.manager = "Brian"
+
+  return "this will not be returned" // This line is useless
 })
 
-console.log("") // te create a blank line in the output
-console.log("beatles:", beatles)
+console.log("\nbeatles after forEach:", beatles) // data have changed
 console.log("")
+
 console.log("result:", result) // no value was returned
+console.log("No value was returned by the forEach method")
