@@ -1,0 +1,98 @@
+/**
+ * Refactoring henriksQ4
+ * 
+ * 1. Place all helper functions inside the _closure_ of the 
+ *    `allSameVowels` function
+ * 2. Use variable and function names that are self-explanatory
+ *    so that comments are not needed
+ * 
+ *    NOTE: Developers often forget to update comments after
+ *    editing code, so comments may describe code that no
+ *    longer exists. Using variable and function names that
+ *    are self-explanatory (= long and precise) means that
+ *    code comments itself.
+ *    
+ * 3. Use arrow functions for functions that can be written
+ *    on one line
+ * 4. Chain array methods together
+ * 5. Use comments that illustrate what a variable contains
+ * 6. Place helper functions _above_ the code that calls them
+ *    so that other developers can read from top to bottom,
+ *    and won't need to scroll backwards and forwards
+ * 
+ * 7. Return `false` immediately if not all items are strings
+ *    so that it is clear that later code will not be
+ *    executed
+ * 
+ * 8. Run tests - including tests that must _fail_ if the
+ *    is correctly written
+ */
+function allSameVowels(array) {
+  const itemIsAString = (item) => typeof item === "string";
+
+  const allItemsAreStrings = array.every(itemIsAString);
+  if (!allItemsAreStrings) {
+    return false;
+  }
+
+  const isAVowel = (char) => "AEIOUaeiou".includes(char);
+
+  const isUnique = (item, index, array) => {
+    return array.indexOf(item) === index;
+  };
+
+  function stringContainsJustOneVowel(string) { // "zoom"
+    const array = string.split("")         // ["z", "o", "o", "m"]
+    const vowels = array.filter(isAVowel)  // ["o", "o"]
+                        .filter(isUnique); // ["o"]
+
+    return vowels.length === 1; // true
+  }
+
+  return array.every(stringContainsJustOneVowel);
+}
+
+const notAllStrings  = ["initialize", "ZOOM", 7];
+const notAllOneVowel = ["initialize", "ZOOM", "seven"];
+const allOneVowel    = ["init", "ZOOM", "seven"];
+
+console.log("allSameVowels(notAllStrings):", allSameVowels(notAllStrings), "<<< expect false");
+console.log("allSameVowels(notAllOneVowel):", allSameVowels(notAllOneVowel), "<<< expect false");
+console.log("allSameVowels(allOneVowel):", allSameVowels(allOneVowel), "<<< expect true");
+
+
+// allSameVowels(notAllStrings): false <<< expect false
+// allSameVowels(notAllOneVowel): false <<< expect false
+// allSameVowels(allOneVowel): true <<< expect true
+
+// HERE IS A MORE COMPACT VERSION OF THE FUNCTION ABOVE,
+// WITH TWO LEVELS OF NESTING (closure).
+// CAN YOU FOLLOW THE LOGIC? CAN YOU USE THE DEBUGGER
+// TO STEP THROUGH IT?
+
+function allSameVowels2(array) {
+  function stringContainsJustOneVowel(string) { // "zoom"
+    const isAVowel = (char) => "AEIOUaeiou".includes(char);
+
+    const isUnique = (item, index, array) => {
+      return array.indexOf(item) === index;
+    };
+
+    const array = string.split("")         // ["z", "o", "o", "m"]
+    const vowels = array.filter(isAVowel)  // ["o", "o"]
+                        .filter(isUnique); // ["o"]
+
+    return vowels.length === 1; // true
+  }
+
+  return ( array.every((item) => typeof item === "string")
+         ? array.every(stringContainsJustOneVowel)
+         : false
+         )
+}
+
+
+console.log("")
+console.log("allSameVowels2(notAllStrings):", allSameVowels2(notAllStrings), "<<< expect false");
+console.log("allSameVowels2(notAllOneVowel):", allSameVowels2(notAllOneVowel), "<<< expect false");
+console.log("allSameVowels2(allOneVowel):", allSameVowels2(allOneVowel), "<<< expect true");

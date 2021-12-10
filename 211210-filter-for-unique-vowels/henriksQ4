@@ -1,0 +1,32 @@
+const testArray = ["INIT","ZOOM","SEVEN"];
+function itemIsAString(item){
+return typeof item === 'string'
+}
+function stringContainsJustOneVowel(string){
+  const arrayOfChar = string.split('')
+  const vowels=arrayOfChar.filter(isAVowel).filter(isUnique)
+  console.log(vowels)
+  return vowels.length === 1
+}
+function isAVowel(single){
+    const vowels ="aeiou"
+    single = single.toLowerCase()
+    return vowels.includes(single)
+}
+function isUnique(item, index, array) {
+    return array.indexOf(item) === index;
+}
+function allSameVowels(array){
+    const allItemsAreStrings = array.every(itemIsAString)
+    // console.log(allItemsAreStrings)
+    if (!allItemsAreStrings){
+        return false
+    }
+    const allContainOneVowel =  array.every(stringContainsJustOneVowel)
+    console.log(allContainOneVowel)
+}
+const isOnlyStrings = testArray.every(itemIsAString)
+// console.log(isOnlyStrings)
+// console.log(isAVowel("b"))
+// console.log(stringContainsJustOneVowel("Henrik"))
+allSameVowels(testArray)
