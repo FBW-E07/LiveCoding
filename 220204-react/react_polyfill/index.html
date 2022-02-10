@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Testing Globals</title>
+</head>
+
+<body> 
+  <p id="feedback"></p>
+  
+  <script>
+    // Variables and functions declared at the top level
+    // are assigned to the global window scope
+
+    function GlobalFunction() {
+      // I was created by a function declaration
+    }
+    var GlobalFunctionExpression = function() {
+      // I was created by a function expression
+    }
+    var GlobalArrowFunction = () => {
+      // I was created as an arrow function
+    }
+
+    var feedback = `
+    window.GlobalFunction: ${window.GlobalFunction}
+
+    window.GlobalFunctionExpression: ${window.GlobalFunctionExpression}
+
+    window.GlobalArrowFunction: ${window.GlobalArrowFunction}
+    `
+    document.getElementById("feedback").innerText = feedback;
+    // Shows values of global variable and function in the browser
+  </script>
+</body>
+</html>
