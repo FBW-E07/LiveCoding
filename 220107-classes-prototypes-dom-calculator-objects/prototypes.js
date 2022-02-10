@@ -17,7 +17,7 @@ function getLastArrayItem () {
 }
 
 
-// Let's add it to an array instace
+// Let's add it to an array instance
 const array1 = [ 1, 2, 3, 4 ]
 array1.getLast = getLastArrayItem
 console.log("array1.getLast():", array1.getLast())
